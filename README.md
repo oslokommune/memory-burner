@@ -15,8 +15,19 @@ to an application using all available memory.
 Try not to run this locally. Use the docker image inside docker to test it out.
 
 ```shell
-docker run --rm -e DELAY=5 ghcr.io/oslokommune/memory-burner:v0.0.2
+docker run --rm \
+	-e DELAY=5 \
+	-e STRATEGY=burn \
+	-e CHUNK_MEGABYTE_SIZE=
+	ghcr.io/oslokommune/memory-burner:v0.0.2
 ```
 
 where `DELAY` determines how many seconds from execution to the actual memory
 burn begins. Default is 1 second.
+
+where `STRATEGY` determines if the app should just hold on to the memory, i.e.:
+`hold`, or if it should try to burn as much memory as possible, i.e.: `burn`.
+
+where `CHUNK_MEGABYTE_SIZE` determines how many megabytes of memory it should
+hold on to in the `hold` strategy. Or how many megabytes of memory it should
+burn each CPU cycle for the `burn` strategy.
