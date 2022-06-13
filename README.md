@@ -1,5 +1,7 @@
 # Memory burner
 
+![disaster girl meme](https://i.kym-cdn.com/photos/images/original/000/000/130/disaster-girl.jpg)
+
 ## Why
 
 To reproduce an issue where a node in a Kubernetes cluster got terminated due
