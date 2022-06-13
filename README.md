@@ -1,6 +1,6 @@
 # Memory burner
 
-<div style="width: 100%; display: flex;">
+<div style="width: 100%; display: flex; justify-content: center;">
   <img src="https://i.kym-cdn.com/photos/images/original/000/000/130/disaster-girl.jpg"/>
 </div>
 
