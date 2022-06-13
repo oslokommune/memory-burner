@@ -1,11 +1,7 @@
 <p align="center">
-  <img width="160" src="https://i.kym-cdn.com/photos/images/original/000/000/130/disaster-girl.jpg" />
+  <img width="256" src="https://i.kym-cdn.com/photos/images/original/000/000/130/disaster-girl.jpg" />
   <h3 align="center">Memory Burner</h3>
 </p>
-
-<div style="width: 100%; display: flex; justify-content: center;">
-  <img src="https://i.kym-cdn.com/photos/images/original/000/000/130/disaster-girl.jpg"/>
-</div>
 
 ## Why
 
