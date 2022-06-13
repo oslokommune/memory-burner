@@ -1,11 +1,11 @@
 # Memory burner
 
-# Why
+## Why
 
 To reproduce an issue where a node in a Kubernetes cluster got terminated due
 to an application using all available memory.
 
-# How
+## How
 
 `while(true) malloc(1MB)`, pretty much.
 
