@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memburn
+spec:
+  containers:
+  - image: ghcr.io/oslokommune/memory-burner:v0.0.2
+    name: memburn
+    env:
+      name: DELAY
+      value: '1'
+
