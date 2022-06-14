@@ -2,72 +2,61 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-
-const int defaultDelay = 1;
-const int kilobyte = 1024;
-const int megabyte = 1024 * kilobyte;
+#include "pkg/log.h"
+#include "pkg/cfg.h"
 
 const char *strategyBurn = "burn";
 const char *strategyHold = "hold";
 
-struct Config {
-	int delaySeconds;
-	int chunkByteSize;
-	char * strategy;
-};
+char * concat(char * a, char * b) {
+	int aLength = strlen(a);
+	int bLength = strlen(b);
+	int resultLength = aLength + bLength + 1;
 
-const char * envGet(char * key, char * defaultValue) {
-	char *value = getenv(key);
+	char * result = malloc(sizeof(char) * resultLength);
+	int resultIndex = 0;
 
-	if(!value) return defaultValue;
+	for(int currentIndex = 0; currentIndex < aLength; currentIndex++)
+		result[resultIndex++] = a[currentIndex];
 
-	return value;
+	for(int currentIndex = 0; currentIndex < bLength; currentIndex++)
+		result[resultIndex++] = b[currentIndex];
+
+	result[resultLength - 1] = '\0';
+
+	return result;
 }
 
-int envGetInt(char * key, int defaultValue) {
-	const char *value = envGet(key, "");
-
-	int valueAsInt = atoi(value);
-
-	if(valueAsInt == 0) return defaultValue;
-
-	return valueAsInt;
-}
-
-struct Config loadConfig() {
-	struct Config cfg;
-
-	cfg.delaySeconds = envGetInt("DELAY", 1);
-	cfg.chunkByteSize = envGetInt("CHUNK_MEGABYTE_SIZE", 1 * megabyte);
-	strcpy(cfg.strategy, envGet("STRATEGY", "burn"));
-
-	return cfg;
-}
-
-int main() {
-	printf("Loading config..\n");
-
-	struct Config cfg = loadConfig();
-
-	printf("Delaying for %d seconds\n", cfg.delaySeconds);
-
-	fflush(stdout);
-
-	sleep(cfg.delaySeconds);
-
-	if(strcmp(cfg.strategy, strategyBurn)) {
+void burn(char * strategy, int chunkByteSize) {
+	if(strcmp(strategy, strategyBurn) == 0) {
 		for(int i = 1; 1; i++) {
-			malloc(cfg.chunkByteSize);
+			malloc(chunkByteSize);
 		}
 
-		return 0;
+		return;
 	}
 
-	malloc(cfg.chunkByteSize);
+	malloc(chunkByteSize);
 
 	while(1) {
 		sleep(10);
 	}
+}
 
-	printf("Burn success\n");
+int main() {
+	d("Loading config..");
+
+	struct Config cfg = LoadConfig();
+
+	d("Config loaded");
+
+	printf("Delaying for %d seconds\n", cfg.delaySeconds);
+
+	sleep(cfg.delaySeconds);
+
+	d(concat("executing strategy ", cfg.strategy));
+
+	burn(cfg.strategy, cfg.chunkByteSize);
+
+	d("Burn success");
 }
