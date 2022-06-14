@@ -22,12 +22,23 @@ docker run --rm \
 	ghcr.io/oslokommune/memory-burner:v0.0.2
 ```
 
-where `DELAY` determines how many seconds from execution to the actual memory
-burn begins. Default is 1 second.
+## Configuration
 
-where `STRATEGY` determines if the app should just hold on to the memory, i.e.:
-`hold`, or if it should try to burn as much memory as possible, i.e.: `burn`.
+Memory burner is configured using environment variables. The following
+configuration parameters are available:
 
-where `CHUNK_MEGABYTE_SIZE` determines how many megabytes of memory it should
-hold on to in the `hold` strategy. Or how many megabytes of memory it should
-burn each CPU cycle for the `burn` strategy.
+### DELAY
+
+determines how many seconds from execution to the actual memory burn begins.
+Default is 1 second.
+
+### STRATEGY
+
+Determines if the app should just hold on to the memory, i.e.: `hold`, or if it
+should try to burn as much memory as possible, i.e.: `burn`.
+
+### CHUNK_MEGABYTE_SIZE
+
+Determines how many megabytes of memory it should hold on to in the `hold`
+strategy. Or how many megabytes of memory it should burn each CPU cycle for the
+`burn` strategy.
