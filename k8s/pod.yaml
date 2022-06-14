@@ -4,7 +4,7 @@ metadata:
   name: memburn
 spec:
   containers:
-  - image: ghcr.io/oslokommune/memory-burner:v0.0.2
+  - image: ghcr.io/oslokommune/memory-burner:v0.0.3
     name: memburn
     env:
       name: DELAY
