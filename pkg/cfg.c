@@ -34,7 +34,8 @@ struct Config LoadConfig() {
 	cfg.delaySeconds = envGetInt("DELAY", defaultDelay);
 
 	d("Querying CHUNK_MEGABYTE_SIZE");
-	cfg.chunkByteSize = envGetInt("CHUNK_MEGABYTE_SIZE", 1 * megabyte);
+	cfg.chunkByteSize = envGetInt("CHUNK_MEGABYTE_SIZE", 1);
+	cfg.chunkByteSize *= megabyte;
 
 	d("Querying STRATEGY");
 	const char * strategy = envGet("STRATEGY", "burn");
