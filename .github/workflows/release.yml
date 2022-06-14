@@ -26,21 +26,21 @@ jobs:
         with:
           fetch-depth: '0'
 
+      - name: Github Tag Bump
+        id: bump_version
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: main
+          WITH_V: true
+
       - name: Login to GitHub Packages Docker Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Github Tag Bump
-        id: bump_version
-        uses: anothrNick/github-tag-action@1.36.0 # 1.34.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          RELEASE_BRANCHES: main
-          WITH_V: true
 
       - run: echo "image_registry=ghcr.io/oslokommune" >> $GITHUB_ENV
       - run: echo "image_name=memory-burner" >> $GITHUB_ENV
