@@ -4,57 +4,25 @@
 #include <string.h>
 #include "pkg/log.h"
 #include "pkg/cfg.h"
-
-const char *strategyBurn = "burn";
-const char *strategyHold = "hold";
-
-char * concat(char * a, char * b) {
-	int aLength = strlen(a);
-	int bLength = strlen(b);
-	int resultLength = aLength + bLength + 1;
-
-	char * result = malloc(sizeof(char) * resultLength);
-	int resultIndex = 0;
-
-	for(int currentIndex = 0; currentIndex < aLength; currentIndex++)
-		result[resultIndex++] = a[currentIndex];
-
-	for(int currentIndex = 0; currentIndex < bLength; currentIndex++)
-		result[resultIndex++] = b[currentIndex];
-
-	result[resultLength - 1] = '\0';
-
-	return result;
-}
-
-void burn(char * strategy, int chunkByteSize) {
-	if(strcmp(strategy, strategyBurn) == 0) {
-		for(int i = 1; 1; i++) {
-			malloc(chunkByteSize);
-		}
-
-		return;
-	}
-
-	malloc(chunkByteSize);
-
-	while(1) {
-		sleep(10);
-	}
-}
+#include "pkg/burn.h"
 
 int main() {
-	d("Loading config..");
+	char msg[100];
+	struct Config cfg;
 
-	struct Config cfg = LoadConfig();
+	d("Loading config");
+
+	cfg = LoadConfig();
 
 	d("Config loaded");
 
-	printf("Delaying for %d seconds\n", cfg.delaySeconds);
+	sprintf(msg, "Delaying for %d seconds", cfg.delaySeconds);
+	d(msg);
 
 	sleep(cfg.delaySeconds);
 
-	d(concat("executing strategy ", cfg.strategy));
+	sprintf(msg, "Executing strategy %s", cfg.strategy);
+	d(msg);
 
 	burn(cfg.strategy, cfg.chunkByteSize);
 

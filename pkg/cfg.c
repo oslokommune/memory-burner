@@ -6,8 +6,6 @@
 #include "cfg.h"
 
 const int defaultDelay = 1;
-const int kilobyte = 1024;
-const int megabyte = 1024 * kilobyte;
 
 const char * envGet(char * key, char * defaultValue) {
 	char *value = getenv(key);
@@ -28,14 +26,18 @@ int envGetInt(char * key, int defaultValue) {
 }
 
 struct Config LoadConfig() {
+	char msg[512];
 	struct Config cfg;
 
 	d("Querying DELAY");
 	cfg.delaySeconds = envGetInt("DELAY", defaultDelay);
+	sprintf(msg, "Delay: %d", cfg.delaySeconds);
+	d(msg);
 
 	d("Querying CHUNK_MEGABYTE_SIZE");
 	cfg.chunkByteSize = envGetInt("CHUNK_MEGABYTE_SIZE", 1);
-	cfg.chunkByteSize *= megabyte;
+	sprintf(msg, "Chunk size: %dMB", cfg.chunkByteSize);
+	d(msg);
 
 	d("Querying STRATEGY");
 	const char * strategy = envGet("STRATEGY", "burn");
@@ -44,6 +46,8 @@ struct Config LoadConfig() {
 
 	strcpy(cfg.strategy, strategy);
 
+	sprintf(msg, "Strategy: %s", cfg.strategy);
+	d(msg);
 	d("Config complete");
 
 	return cfg;
