@@ -7,6 +7,9 @@ spec:
   - image: ghcr.io/oslokommune/memory-burner:v0.0.3
     name: memburn
     env:
-      name: DELAY
-      value: '1'
-
+    - name: DELAY
+      value: '10'
+    - name: STRATEGY
+      value: burn
+    - name: CHUNK_MEGABYTE_SIZE
+      value: 500
