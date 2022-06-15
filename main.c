@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+#include <stdio.h> // sprintf()
+#include <unistd.h> // sleep()
 #include "pkg/log.h"
 #include "pkg/cfg.h"
 #include "pkg/burn.h"
