@@ -19,7 +19,7 @@ docker run --rm \
 	-e DELAY=5 \
 	-e STRATEGY=burn \
 	-e CHUNK_MEGABYTE_SIZE=
-	ghcr.io/oslokommune/memory-burner:v0.0.2
+	ghcr.io/oslokommune/memory-burner:v0.0.5
 ```
 
 ## Configuration
