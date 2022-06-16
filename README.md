@@ -18,8 +18,8 @@ Try not to run this locally. Use the docker image inside docker to test it out.
 docker run --rm \
 	-e DELAY=5 \
 	-e STRATEGY=burn \
-	-e CHUNK_MEGABYTE_SIZE=
-	ghcr.io/oslokommune/memory-burner:v0.0.5
+	-e CHUNK_MEGABYTE_SIZE=1000 \
+	ghcr.io/oslokommune/memory-burner:v0.0.6
 ```
 
 ## Configuration
